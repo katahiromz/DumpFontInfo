@@ -341,6 +341,11 @@ std::string DoGetEncodingIDString(FT_UShort platform_id, FT_UShort encoding_id)
     }
 }
 
+void show_help(void)
+{
+    cout << "Usage: DumpFontInfo \"font-file.ttf\"\n";
+}
+
 int main(int argc, char **argv)
 {
     FT_Library library;
@@ -349,10 +354,16 @@ int main(int argc, char **argv)
     FT_Error error;
     const char *filename;
 
-    std::string arg = argv[1];
-    if (argc <= 1 || arg == "--help")
+    if (argc <= 1)
     {
-        cout << "Usage: DumpFontInfo \"font-file.ttf\"\n";
+        show_help();
+        return 0;
+    }
+
+    std::string arg = argv[1];
+    if (arg == "--help")
+    {
+        show_help();
         return 0;
     }
 
